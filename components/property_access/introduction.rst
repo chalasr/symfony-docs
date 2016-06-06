@@ -49,7 +49,7 @@ method. This is done using the index notation that is used in PHP::
 .. caution::
 
     As you can see, the method will return ``null`` if the index does not exists.
-    To make it throws an exception in case of invalid index, set the first argument
+    To make it throw an exception in case of invalid index, set the first argument
     :method:`PropertyAccess::createPropertyAccessor<Symfony\\Component\\PropertyAccess\\PropertyAccess::createPropertyAccessor()>`
     to true, e.g. ``PropertyAccess::createPropertyAccessor(true)``.
 
@@ -329,7 +329,7 @@ instead::
 .. caution::
 
     Calling :method:`PropertyAccess::createPropertyAccessor<Symfony\\Component\\PropertyAccess\\PropertyAccess::createPropertyAccessor()>`
-    with an array for an invalid index would always return ``true``. To make it returns ``false``, set the first argument
+    with an array for an invalid index would always return ``true``. To make it return ``false``, set the first argument
     :method:`PropertyAccess::createPropertyAccessor<Symfony\\Component\\PropertyAccess\\PropertyAccess::createPropertyAccessor()>`
     to true, e.g. ``PropertyAccess::createPropertyAccessor(true)``.
 
