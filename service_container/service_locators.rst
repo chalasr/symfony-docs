@@ -91,8 +91,7 @@ option to include as many services as needed to it and add the
 
             app.command_handler_locator:
                 class: Symfony\Component\DependencyInjection\ServiceLocator
-                arguments:
-                    AppBundle\FooCommand: '@app.command_handler.foo'
+                arguments: [AppBundle\FooCommand: '@app.command_handler.foo'
                     AppBundle\BarCommand: '@app.command_handler.bar'
                 tags: ['container.service_locator']
 
@@ -106,8 +105,10 @@ option to include as many services as needed to it and add the
             <services>
 
                 <service id="app.command_handler_locator" class="Symfony\Component\DependencyInjection\ServiceLocator">
-                    <argument key="AppBundle\FooCommand" type="service" id="app.command_handler.foo" />
-                    <argument key="AppBundle\BarCommand" type="service" id="app.command_handler.bar" />
+                    <argument type="collection">
+                        <argument key="AppBundle\FooCommand" type="service" id="app.command_handler.foo" />
+                        <argument key="AppBundle\BarCommand" type="service" id="app.command_handler.bar" />
+                    </argument>
                     <tag name="container.service_locator" />
                 </service>
 
@@ -124,10 +125,10 @@ option to include as many services as needed to it and add the
         $container
             ->register('app.command_handler_locator', ServiceLocator::class)
             ->addTag('container.service_locator')
-            ->setArguments(array(
+            ->setArguments(array(array(
                 'AppBundle\FooCommand' => new Reference('app.command_handler.foo'),
                 'AppBundle\BarCommand' => new Reference('app.command_handler.bar'),
-            ))
+            )))
         ;
 
 .. note::
@@ -144,7 +145,7 @@ Now you can use the service locator injecting it in any other service:
         services:
 
             AppBundle\CommandBus:
-                arguments: ['@app.command_handler_locator']
+                arguments: '@app.command_handler_locator']
 
     .. code-block:: xml
 
